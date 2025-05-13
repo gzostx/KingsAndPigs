@@ -5,9 +5,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_rigidbody2D;
     private GatherInput m_gatherInput;
     private Transform m_transform;
+    private Animator m_animator;
 
     [SerializeField] private float speed;
     private int direction = 1;
+    private int idSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,8 +17,21 @@ public class PlayerController : MonoBehaviour
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_transform = GetComponent<Transform>();
         m_gatherInput = GetComponent<GatherInput>();
+        m_animator = GetComponent<Animator>();
+        idSpeed = Animator.StringToHash("Speed");
+        
     }
-    
+
+    void Update()
+    {
+        SetAnimatorValue();
+    }
+
+    private void SetAnimatorValue()
+    {
+        m_animator.SetFloat(idSpeed, Mathf.Abs(m_rigidbody2D.linearVelocityX));
+    }
+
     void FixedUpdate()
     {
         Move();
