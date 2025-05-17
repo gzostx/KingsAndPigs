@@ -337,10 +337,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a6fd6153417774da211d6cec468f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_transform: {fileID: 152688953}
   speed: 4
   extraJump: 1
   counterExtraJump: 0
   jumpForce: 10
+  canDoubleJump: 0
   lFoot: {fileID: 0}
   rFoot: {fileID: 0}
   isGrounded: 0
@@ -348,6 +350,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  wallDistanceRay: 0.27
+  isWallDetected: 0
 --- !u!114 &152688957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +551,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.67398685, y: 1.32805, z: -10}
+  m_LocalPosition: {x: 0.68390685, y: 0.74683, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
