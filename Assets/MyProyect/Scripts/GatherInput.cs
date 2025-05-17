@@ -6,11 +6,11 @@ using UnityEngine.Serialization;
 
 public class GatherInput : MonoBehaviour
 { 
-    private Controls controls;
-  [FormerlySerializedAs("valueX")] [SerializeField]  private float _valueX;
-  public float ValueX
+    private Controls controls; 
+    [FormerlySerializedAs("_valueX")] [SerializeField]  private Vector2 _value;
+  public Vector2 Value
   {
-      get => _valueX;
+      get => _value;
   }
 
   [SerializeField] private bool _isJumping;
@@ -36,12 +36,12 @@ public class GatherInput : MonoBehaviour
 
     private void StartMove(InputAction.CallbackContext context)
     {
-        _valueX = context.ReadValue<float>();
+        _value = context.ReadValue<Vector2>().normalized;
     }
 
     private void StopMove(InputAction.CallbackContext context)
     {
-        _valueX = 0;
+        _value = Vector2.zero;
     }
     
     private void StartJump(InputAction.CallbackContext context)

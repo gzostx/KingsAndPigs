@@ -295,8 +295,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.015588045, y: -0.058229893}
-  m_Size: {x: 0.55290365, y: 0.81571764}
+  m_Offset: {x: -0.018972635, y: -0.058229893}
+  m_Size: {x: 0.5325682, y: 0.81571764}
   m_Direction: 0
 --- !u!50 &152688955
 Rigidbody2D:
@@ -352,6 +352,11 @@ MonoBehaviour:
     m_Bits: 128
   wallDistanceRay: 0.27
   isWallDetected: 0
+  canWallSlide: 0
+  wallSlideSpeed: 0
+  wallJumpForce: {x: 5, y: 8}
+  isWallJumping: 0
+  wallJumpDuration: 0.25
 --- !u!114 &152688957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a10bdccc2498b144a2360d8057ee88d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _valueX: 0
+  _value: {x: 0, y: 0}
   _isJumping: 0
 --- !u!114 &152688958
 MonoBehaviour:
@@ -551,7 +556,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68390685, y: 0.74683, z: -10}
+  m_LocalPosition: {x: 0.68390685, y: 0.74683, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -729,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 10
+  CameraDistance: 5
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -744,7 +749,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0.5, y: 0.7, z: 1}
   Lookahead:
-    Enabled: 1
+    Enabled: 0
     Time: 0
     Smoothing: 0
     IgnoreY: 0
@@ -800,7 +805,7 @@ Transform:
   m_GameObject: {fileID: 875910053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 2.15, z: -10}
+  m_LocalPosition: {x: 0.66000026, y: 2.15, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -831,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoundingShape2D: {fileID: 905504589}
-  Damping: 0.5
+  Damping: 1
   SlowingDistance: 5
   OversizeWindow:
     Enabled: 0
