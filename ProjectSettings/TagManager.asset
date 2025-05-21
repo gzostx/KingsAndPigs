@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Ground
   - Ignore
-  - 
+  - Items
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: MiddleGround
     uniqueID: 4076489439
+    locked: 0
+  - name: Items
+    uniqueID: 1310279167
     locked: 0
   - name: Player
     uniqueID: 1843041915
