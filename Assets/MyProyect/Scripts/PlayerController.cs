@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
    // [SerializeField] private bool canBeKnocked;
     [SerializeField] private Vector2 knockedPower;
     [SerializeField] private float knockedDuration;
+    
+    [Header("Death VFX")]
+    [SerializeField] private GameObject deathVFXPrefab;
 
     private void Awake()
     {
@@ -206,7 +209,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(knockedDuration);
         isKnocked = false;
        // canBeKnocked = true;
-        
+    }
+
+    public void Die()
+    {
+        GameObject deathVFX = Instantiate(deathVFXPrefab, mTransform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
     private void OnDrawGizmos()
     {
