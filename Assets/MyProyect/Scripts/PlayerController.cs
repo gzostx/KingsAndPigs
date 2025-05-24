@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     
     [Header("Move Settings")] 
     [SerializeField] private float speed;
+    [SerializeField] private bool canMove;
+    [SerializeField] private float moveDelay;
     private int _direction = 1;
+    
     
     [Header("Jump Settings")] 
     [SerializeField] private int extraJump;
@@ -61,6 +64,14 @@ public class PlayerController : MonoBehaviour
        // m_transform = GetComponent<Transform>();
         _mGatherInput = GetComponent<GatherInput>();
         _mAnimator = GetComponent<Animator>();
+        canMove = false;
+        StartCoroutine(CanMoveRoutine());
+    }
+
+    private IEnumerator CanMoveRoutine()
+    {
+        yield return new WaitForSeconds(moveDelay);
+        canMove = true;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,8 +81,6 @@ public class PlayerController : MonoBehaviour
         _idIsGrounded = Animator.StringToHash("IsGrounded");
         _idIsWallDetected = Animator.StringToHash("IsWallDetected");
         _idKnockBack = Animator.StringToHash("KnockBack");
-        rFoot = GameObject.Find("R_Foot").GetComponent<Transform>();
-        lFoot = GameObject.Find("L_Foot").GetComponent<Transform>();
         counterExtraJump = extraJump;
     }
 
@@ -88,6 +97,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!canMove) return;
         if (isKnocked) return;
         CheckCollision();
         Move(); 
