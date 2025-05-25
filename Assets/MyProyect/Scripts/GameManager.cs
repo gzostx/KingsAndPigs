@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Setting Player")]
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform playerResPawnPoint;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private float ReSpawnPlayerDelay;
     public PlayerController PlayerController { get => playerController; }
@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool diamondHaveRandomLook;
     private int _diamondCollected;
     
-    public int DiamondCollected { get => _diamondCollected; }
+    [Header("Setting ReSpawnPlayer")]
+    public bool hasCheckPointActive;
+    public Vector3 checkPoinRespawnPosition;
+    
+    public int diamondCollected { get => _diamondCollected; }
    
 
    private void Awake()
@@ -34,13 +38,17 @@ public class GameManager : MonoBehaviour
 
     public void ReSpawnPlayer()
     {
+        if (hasCheckPointActive)
+        {
+            playerResPawnPoint.position = checkPoinRespawnPosition;
+        }
         StartCoroutine(RespawnPlayerCoroutine());
     }
 
     IEnumerator RespawnPlayerCoroutine()
     {
         yield return new WaitForSeconds(ReSpawnPlayerDelay);
-        GameObject newPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject newPlayer = Instantiate(playerPrefab, playerResPawnPoint.position, Quaternion.identity);
         newPlayer.name = "Player";
         playerController = newPlayer.GetComponent<PlayerController>();
     }

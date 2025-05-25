@@ -64,8 +64,33 @@ public class PlayerController : MonoBehaviour
        // m_transform = GetComponent<Transform>();
         _mGatherInput = GetComponent<GatherInput>();
         _mAnimator = GetComponent<Animator>();
-        canMove = false;
-        StartCoroutine(CanMoveRoutine());
+        
+    }
+
+    void Start()
+    {
+        // Cambie la llamada de CheckPlayerRespawnState a Start() porque tuve un problema con una referencia perdida
+        // en el GameManager
+        CheckPlayerResPawnState();
+        _idSpeed = Animator.StringToHash("speed");
+        _idIsGrounded = Animator.StringToHash("IsGrounded");
+        _idIsWallDetected = Animator.StringToHash("IsWallDetected");
+        _idKnockBack = Animator.StringToHash("KnockBack");
+        counterExtraJump = extraJump;
+    }
+
+    private void CheckPlayerResPawnState()
+    {
+        if ( GameManager.Instance != null && GameManager.Instance.hasCheckPointActive)
+        {
+            canMove = true;
+            _mAnimator.Play("Idle");
+        }
+        else
+        {
+            canMove = false;
+            StartCoroutine(CanMoveRoutine());
+        }
     }
 
     private IEnumerator CanMoveRoutine()
@@ -75,14 +100,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        _idSpeed = Animator.StringToHash("speed");
-        _idIsGrounded = Animator.StringToHash("IsGrounded");
-        _idIsWallDetected = Animator.StringToHash("IsWallDetected");
-        _idKnockBack = Animator.StringToHash("KnockBack");
-        counterExtraJump = extraJump;
-    }
 
     private void SetAnimatorValue()
     {
