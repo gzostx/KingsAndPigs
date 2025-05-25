@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     
     [Header("Diamond Manager")]
     [SerializeField] private bool diamondHaveRandomLook;
+    [SerializeField] private int totalDiamonds;
     private int _diamondCollected;
+    
     
     [Header("Setting ReSpawnPlayer")]
     public bool hasCheckPointActive;
@@ -34,6 +36,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        TotalDiamondsInLevel();
+    }
+
+    private void TotalDiamondsInLevel()
+    {
+        GameObject [] diamonds = GameObject.FindGameObjectsWithTag("Diamond");
+        totalDiamonds = diamonds.Length;
     }
 
     public void ReSpawnPlayer()

@@ -5341,6 +5341,7 @@ MonoBehaviour:
   playerController: {fileID: 152688956}
   ReSpawnPlayerDelay: 1
   diamondHaveRandomLook: 0
+  totalDiamonds: 0
   hasCheckPointActive: 0
   checkPoinRespawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2042467922
