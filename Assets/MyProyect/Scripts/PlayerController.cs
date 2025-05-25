@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int IdDoorIn = Animator.StringToHash("DoorIn");
+
     [FormerlySerializedAs("m_transform")]
     [Header("Components")] 
     [SerializeField] private Transform mTransform;
@@ -246,5 +249,20 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(mTransform.position, new Vector2(mTransform.position.x + (wallDistanceRay * _direction), mTransform.position.y));
+    }
+
+    public void DoorIn()
+    {
+        _mRigidbody2D.linearVelocity = Vector2.zero;
+        _mAnimator.Play("Idle");
+        _mAnimator.SetBool(IdDoorIn, true);
+        canMove = false;
+        StartCoroutine(DoorInRoutine());
+    }
+
+    private IEnumerator DoorInRoutine()
+    {
+        yield return new WaitForSeconds(moveDelay);
+        SceneManager.LoadScene(0);
     }
 }
