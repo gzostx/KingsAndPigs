@@ -55,8 +55,15 @@ public class PlayerController : MonoBehaviour
     [Header("Knock Settings")]
     [SerializeField] private bool isKnocked;
    // [SerializeField] private bool canBeKnocked;
-    [SerializeField] private Vector2 knockedPower;
+    private Vector2 _knockedPower;
+    [SerializeField] private Vector2 knockedPowerDefault;
     [SerializeField] private float knockedDuration;
+
+    public Vector2 KnockedPower
+    {
+        get => _knockedPower;
+        set => _knockedPower = value;
+    }
     
     [Header("Death VFX")]
     [SerializeField] private GameObject deathVFXPrefab;
@@ -80,6 +87,7 @@ public class PlayerController : MonoBehaviour
         _idIsWallDetected = Animator.StringToHash("IsWallDetected");
         _idKnockBack = Animator.StringToHash("KnockBack");
         counterExtraJump = extraJump;
+        _knockedPower = knockedPowerDefault;
     }
 
     private void CheckPlayerResPawnState()
@@ -228,16 +236,19 @@ public class PlayerController : MonoBehaviour
     public void KnockBack()
     {
         StartCoroutine(KnockBackCoroutine());
-        _mRigidbody2D.linearVelocity = new Vector2(knockedPower.x * -_direction,  knockedPower.y);
-        _mAnimator.SetTrigger(_idKnockBack);
+        _mRigidbody2D.linearVelocity = new Vector2(_knockedPower.x * -_direction,  _knockedPower.y);
+        
     }
 
     IEnumerator KnockBackCoroutine()
     {
         isKnocked = true;
+        _mAnimator.SetBool(_idKnockBack,isKnocked);
        // canBeKnocked = false;
         yield return new WaitForSeconds(knockedDuration);
         isKnocked = false;
+        _mAnimator.SetBool(_idKnockBack,isKnocked);
+        _knockedPower = new Vector2(knockedPowerDefault.x, knockedPowerDefault.y);
        // canBeKnocked = true;
     }
 

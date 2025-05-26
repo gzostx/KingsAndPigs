@@ -301,8 +301,8 @@ MonoBehaviour:
   isWallJumping: 0
   wallJumpDuration: 0.25
   isKnocked: 0
-  knockedPower: {x: 3, y: 0}
-  knockedDuration: 0.5
+  knockedPowerDefault: {x: 3, y: 0}
+  knockedDuration: 0.3
   deathVFXPrefab: {fileID: 2053961369904708224, guid: 9296d61f0fc8b1242bbb8024ddb373ef, type: 3}
 --- !u!95 &681771672141250568
 Animator:
